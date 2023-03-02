@@ -1,0 +1,19 @@
+{
+  "name": "apps_testes_node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.35.0",
+    "vitest": "^0.29.2"
+  },
+  "dependencies": {
+    "date-fns": "^2.29.3"
+  }
+}

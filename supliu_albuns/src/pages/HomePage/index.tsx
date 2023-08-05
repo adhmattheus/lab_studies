@@ -1,20 +1,20 @@
-import ModalComponent from "../../components/modal";
+import { apiUrl, apiUrlTrack, apiUrlTrackDelete, headers } from "../../utils/apiConfig";
 import { Album, ApiResponse, Track } from "../../types/interfaces";
+import ModalComponent from "../../components/modal";
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import formatDuration from "../../utils/formatDuration";
-import { apiUrl, apiUrlTrack, apiUrlTrackDelete, headers } from "../../utils/apiConfig";
 import { Trash } from "phosphor-react";
 import { MusicNotesPlus } from "phosphor-react";
 import React from "react";
 
 export default function HomePage() {
   const [albums, setAlbums] = useState<Album[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isAddingAlbum, setIsAddingAlbum] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isAddingAlbum, setIsAddingAlbum] = useState<boolean>(true);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
   const [albumId, setAlbumId] = useState<number | null>(null);
 
   const openModalNewAlbum = () => {
@@ -89,7 +89,6 @@ export default function HomePage() {
   };
 
   const handleAddTrack = async (values: Track) => {
-
     try {
       // Converte a duração para segundos, caso seja uma entrada válida não vazia
       let durationInSeconds = 0;
@@ -135,7 +134,7 @@ export default function HomePage() {
 
     <div className="bg-white bg-opacity-75 mt-5 mx-20 ">
 
-      <div className="bg-white flex justify-between items-center  p-5">
+      <div className="bg-white flex justify-between items-center p-5">
         <img src="./src/assets/logo.png" alt="" />
         <p className="text-6xl">Discografia</p>
       </div>
@@ -179,7 +178,7 @@ export default function HomePage() {
           isOpen={isModalOpen}
           onRequestClose={closeModal}
           handleSaveAlbum={handleSaveAlbum}
-          handleSaveTrack={handleAddTrack} // Aqui passamos a função para adicionar a faixa
+          handleSaveTrack={handleAddTrack}
           isAddingAlbum={isAddingAlbum}
           albumId={albumId || 0}
         />
@@ -258,7 +257,7 @@ export default function HomePage() {
           <button
             title="Voltar página"
             className="bg-yellow-500 hover:bg-yellow-700 text-white py-2 px-4 rounded-full mt-4"
-            disabled={currentPage === 1}
+            style={{ visibility: currentPage > 1 ? "visible" : "hidden" }}
             onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
           >
             Página Anterior
@@ -266,7 +265,7 @@ export default function HomePage() {
           <button
             title="Avançar página"
             className="bg-yellow-500 hover:bg-yellow-700 text-white py-2 px-4 rounded-full mt-4"
-            disabled={currentPage === totalPages}
+            style={{ visibility: currentPage < totalPages ? "visible" : "hidden" }}
             onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
           >
             Próxima página

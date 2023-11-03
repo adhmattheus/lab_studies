@@ -12,6 +12,7 @@ export const HistoryContainer = styled.main`
     color: ${(props) => props.theme['gray-100']};
   }
 `
+
 export const HistoryList = styled.div`
   flex: 1;
   overflow: auto;
@@ -59,6 +60,7 @@ export const HistoryList = styled.div`
     }
   }
 `
+
 const STATUS_COLORS = {
   yellow: 'yellow-500',
   green: 'green-500',
